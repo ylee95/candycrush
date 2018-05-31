@@ -4,20 +4,20 @@
 
 class SdlWrapper {
 public:
-	// Singleton instance.
-	static SdlWrapper instance;
+  // Singleton instance.
+  static SdlWrapper instance;
 
-	~SdlWrapper();
+  ~SdlWrapper();
 
-	// Disable copy constructor.
-	SdlWrapper(const SdlWrapper &) = delete;
-	// Allow move constructor.
-	SdlWrapper(SdlWrapper &&) = default;
+  // Disable copy constructor.
+  SdlWrapper(const SdlWrapper &) = delete;
+  // Allow move constructor.
+  SdlWrapper(SdlWrapper &&) = default;
 
-	bool initialize();
+  bool initialize();
 
 private:
-	bool initialized;
-	SdlWrapper();
+  bool initialized;
+  SdlWrapper();
 };
 #endif // CANDYCRUSH_SDLWRAPPER_H

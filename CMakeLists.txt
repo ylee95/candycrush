@@ -7,6 +7,7 @@ target_include_directories (SDL2 PUBLIC $<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/inc
 
 set (
 	SOURCE_FILES
+	src/game.cpp
 	src/main.cpp
 	src/sdlwrapper.cpp
 )
