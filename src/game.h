@@ -1,37 +1,42 @@
-#ifndef CANDYCRUSH_GAME_H
-#define CANDYCRUSH_GAME_H
+#ifndef DAMAGOCHI_GAME_H
+#define DAMAGOCHI_GAME_H
 #include <map>
 #include <vector>
-enum struct TileColor { RED, BLUE, GREEN };
+enum struct BirdColor {RED, BLUE, GREEN};
+enum struct BirdDev {EGG, CHILD, ADULT};
+enum struct BirdStatus { HUNGRY, HAPPY, DISCIPLINE };
+enum struct Food {RICE, ICECREAM};
 
-enum struct TileType { EMPTY, PLAIN };
-
-struct Tile {
-	TileColor color;
-	TileType type;
+struct Bird {
+	BirdColor color;
+	BirdDev dev;
+	BirdStatus status;
 };
 
 class Game {
 public:
-	Game(int moves, std::vector<TileType> availableTileTypes, int numRow,
-		int numColumn, std::map<TileType, int> objective);
-	// Get number of available moves left for the player.
-	int getMoves() const;
-	// Get a copy of the grid.
-	std::vector<Tile> getGrid() const;
+	Game(Bird bird, time_t currentTime);
 	// Return true if game is over.
 	bool isGameOver() const;
-	// Swap (row1,col1) tile and (row2,col2) tile.
-	void move(int row1, int col1, int row2, int col2);
+	// Feed the bird
+	void giveFood(Food foodType);
+	// Clean the poop
+	void cleanPoop();
+	// Potty Training
+	void pottyTrain();
 
 private:
-	// Number of moves left until game over.
-	int moves;
-	// Types of tiles that can be generated in this game.
-	std::vector<TileType> availableTileTypes;
-	// 1 dimensional representation of 2D game grid.
-	std::vector<Tile> grid;
-	// Number of each tile type to be destroyed.
-	std::map<TileType, int> objective;
+	static const int numPoop = 10;
+	static const int numPottyTraining = 3;
+
+	// Status of Hunger 9: die - 0: full
+	int hunger;
+	// Status of Poop-need 9: will poop soon - 0: do not need to poop
+	int needPoop;
+	// Array of poops
+	std::array<bool, numPoop> poops;
+	// Potty Trained? if all true, is trained
+	std::array<bool, numPottyTraining> isTrained;
+
 };
-#endif // CANDYCRUSH_GAME_H
+#endif // DAMAGOCHI_GAME_H
