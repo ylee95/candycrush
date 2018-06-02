@@ -2,6 +2,7 @@
 #define DAMAGOCHI_GAME_H
 #include <map>
 #include <vector>
+#include <array>
 enum struct BirdColor {RED, BLUE, GREEN};
 enum struct BirdDev {EGG, CHILD, ADULT};
 enum struct BirdStatus { HUNGRY, HAPPY, DISCIPLINE };
