@@ -9,7 +9,6 @@ set (
 	SOURCE_FILES
 	src/game.cpp
 	src/main.cpp
-	src/sdlwrapper.cpp
 )
 add_executable (candycrush ${SOURCE_FILES})
 target_include_directories (candycrush PRIVATE src)
