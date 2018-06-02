@@ -2,8 +2,6 @@
 #define DAMAGOCHI_GAME_H
 #include <array>
 #include <chrono>
-#include <map>
-#include <vector>
 enum struct BirdColor {RED, BLUE, GREEN};
 enum struct BirdDev {EGG, CHILD, ADULT};
 enum struct BirdStatus { HUNGRY, HAPPY, DISCIPLINE };
@@ -40,7 +38,10 @@ private:
 	// Array of poops
 	std::array<bool, numPoop> poops;
 	// Potty Trained? if all true, is trained
-	std::array<bool, numPottyTraining> isTrained;
+	int trainNum;
+	bool isTrained;
+	// dead
+	bool isDead;
 
 };
 #endif // DAMAGOCHI_GAME_H
