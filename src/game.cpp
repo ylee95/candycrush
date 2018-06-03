@@ -58,8 +58,8 @@ std::string Game::toString() {
 	ss << std::endl;
 	ss << "trainNum" << " " << trainNum << std::endl;
 	ss << "isTrained" << " " << isTrained << std::endl;
-	ss << "isDead" << " " << std::endl;
-
+	ss << "isDead" << " " << isDead << std::endl;
+	ss << "happy" << " " << happy << std::endl;
 	return ss.str();
 }
 
@@ -87,6 +87,9 @@ void Game::fromString(std::string str) {
 		}
 		else if (keyword == "isDead") {
 			ss >> isDead;
+		}
+		else if (keyword == "happy") {
+			ss >> happy;
 		}
 		else {
 			// Bad keyword.
