@@ -24,6 +24,8 @@ public:
 
 	// Clear rendering target.
 	void clear(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+	// Update the screen.
+	void present();
 	// Draw a rectangle.
 	void drawRect(int x, int y, int w, int h, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 	// Fill a rectangle.

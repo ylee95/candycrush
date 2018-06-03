@@ -36,6 +36,11 @@ void SdlWrapper::clear(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 	SDL_RenderClear(graphics.renderer.get());
 }
 
+void SdlWrapper::present()
+{
+	SDL_RenderPresent(graphics.renderer.get());
+}
+
 void SdlWrapper::drawRect(int x, int y, int w, int h, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
 	SDL_SetRenderDrawColor(graphics.renderer.get(), r, g, b, a);
