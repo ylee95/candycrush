@@ -1,5 +1,6 @@
 #include <game.h>
 #include <iostream>
+#include <sstream>
 #include <string>
 
 Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), bird(bird) {
@@ -47,22 +48,21 @@ bool Game::isGameOver() const {
 }
 
 std::string Game::toString() {
-	std::string ret = "";
-	ret += "hunger " + std::to_string(hunger) + "\n";
-	ret += "needPoop " + std::to_string(needPoop) + "\n";
-	ret += "poops";
+	std::stringstream ss;
+	ss << "hunger" << " " << hunger << std::endl;
+	ss << "needPoop" << " " << needPoop << std::endl;
+	ss << "poops";
 	for (bool p : poops) {
-		std::string str = p ? "true" : "false";
-		ret += " " + str;
+		ss << p << " ";
 	}
-	ret += "\n";
-	ret += "trainNum " + std::to_string(trainNum) + "\n";
-	std::string str = isTrained ? "true" : "false";
-	ret += "isTrained " + str + "\n";
-	str = isDead ? "true" : "false";
-	ret += "isDead " + str;
+	ss << std::endl;
+	ss << "trainNum" << " " << trainNum << std::endl;
+	ss << "isTrained" << " " << isTrained << std::endl;
+	ss << "isDead" << " " << std::endl;
+
+	return ss.str();
 }
 
-Game fromString(std::string str) {
+void fromString(std::string str) {
 	// ?? not know what to do?
 }
