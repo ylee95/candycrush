@@ -2,6 +2,7 @@
 #define DAMAGOCHI_GAME_H
 #include <array>
 #include <chrono>
+#include <string>
 enum struct BirdColor {RED, BLUE, GREEN};
 enum struct BirdDev {EGG, CHILD, ADULT};
 enum struct BirdStatus { HUNGRY, HAPPY, DISCIPLINE };
@@ -24,6 +25,9 @@ public:
 	void cleanPoop();
 	// Potty Training
 	void pottyTrain();
+	// String methods
+	std::string to_string();
+	Game from_string();
 
 private:
 	static const int numPoop = 10;

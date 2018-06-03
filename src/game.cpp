@@ -1,5 +1,6 @@
 #include <game.h>
 #include <iostream>
+#include <string>
 
 Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), bird(bird) {
 	// Initialize poops array.
@@ -43,4 +44,25 @@ void Game::pottyTrain() {
 
 bool Game::isGameOver() const {
 	return isDead;
+}
+
+std::string Game::to_string() {
+	std::string ret = "";
+	ret += "hunger " + std::to_string(hunger) + "\n";
+	ret += "needPoop " + std::to_string(needPoop) + "\n";
+	ret += "poops";
+	for (int i = 0; i < poops.size(); i++) {
+		std::string str = poops[i] ? "true" : "false";
+		ret += " " + str;
+	}
+	ret += "\n";
+	ret += "trainNum " + std::to_string(trainNum) + "\n";
+	std::string str = isTrained ? "true" : "false";
+	ret += "isTrained " + str + "\n";
+	str = isDead ? "true" : "false";
+	ret += "isDead " + str;
+}
+
+Game from_string(std::string str) {
+	// ?? not know what to do?
 }
