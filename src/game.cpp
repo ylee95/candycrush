@@ -51,8 +51,8 @@ std::string Game::toString() {
 	ret += "hunger " + std::to_string(hunger) + "\n";
 	ret += "needPoop " + std::to_string(needPoop) + "\n";
 	ret += "poops";
-	for (int i = 0; i < poops.size(); i++) {
-		std::string str = poops[i] ? "true" : "false";
+	for (bool p : poops) {
+		std::string str = p ? "true" : "false";
 		ret += " " + str;
 	}
 	ret += "\n";
