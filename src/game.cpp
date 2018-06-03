@@ -83,10 +83,10 @@ void Game::fromString(std::string str) {
 			ss >> trainNum;
 		}
 		else if (keyword == "isTrained") {
-			ss >> std::boolalpha >> isTrained;
+			ss >> isTrained;
 		}
 		else if (keyword == "isDead") {
-			ss >> std::boolalpha >> isDead;
+			ss >> isDead;
 		}
 		else {
 			// Bad keyword.
