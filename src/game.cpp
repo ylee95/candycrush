@@ -71,10 +71,22 @@ void Game::fromString(std::string str) {
 		if (keyword == "hunger") {
 			ss >> hunger;
 		}
+		else if (keyword == "needPoop") {
+			ss >> needPoop;
+		}
 		else if (keyword == "poops") {
 			for (bool &p : poops) {
 				ss >> p;
 			}
+		}
+		else if (keyword == "trainNum") {
+			ss >> trainNum;
+		}
+		else if (keyword == "isTrained") {
+			ss >> std::boolalpha >> isTrained;
+		}
+		else if (keyword == "isDead") {
+			ss >> std::boolalpha >> isDead;
 		}
 		else {
 			// Bad keyword.
