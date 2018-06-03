@@ -1,10 +1,10 @@
 #include <game.h>
 #include <iostream>
 
-Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) {
-	if (bird == null) {
-		this.bird = new Bird();
-
+Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), bird(bird) {
+	// Initialize poops array.
+	for (bool &p : poops) {
+		p = false;
 	}
 }
 
@@ -22,8 +22,8 @@ void Game::giveFood(Food foodType) {
 }
 
 void Game::cleanPoop() {
-	for (int i = 0; i < poops.size(); i++) {
-		poops[i] = false;
+	for (bool &p : poops) {
+		p = false;
 	}
 }
 
