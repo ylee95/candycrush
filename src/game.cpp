@@ -1,4 +1,5 @@
 #include <game.h>
+#include <iostream>
 
 
 void Game::giveFood(Food foodType) {
@@ -15,7 +16,7 @@ void Game::giveFood(Food foodType) {
 }
 
 void Game::cleanPoop() {
-	for (int i = 0; i < poops.size; i++) {
+	for (int i = 0; i < poops.size(); i++) {
 		poops[i] = false;
 	}
 }
@@ -27,10 +28,10 @@ void Game::pottyTrain() {
 		if (trainNum > numPottyTraining) {
 			isTrained = true;
 		}
-		std::cout << "Pooped!" << endl;
+		std::cout << "Pooped!" << std::endl;
 	}
 	else {
-		std::cout << "Cannot poop yet" << endl;
+		std::cout << "Cannot poop yet" << std::endl;
 	}
 }
 
