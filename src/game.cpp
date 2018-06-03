@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), bird(bird) {
+Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : happy(0), birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), bird(bird) {
 	// Initialize poops array.
 	for (bool &p : poops) {
 		p = false;
