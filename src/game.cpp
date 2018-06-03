@@ -1,5 +1,11 @@
 #include <game.h>
 
+Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) {
+	if (bird == null) {
+		this.bird = new Bird();
+
+	}
+}
 
 void Game::giveFood(Food foodType) {
 	if (foodType == Food::RICE) {

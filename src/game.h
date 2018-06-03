@@ -43,5 +43,8 @@ private:
 	// dead
 	bool isDead;
 
+	//Bird
+	Bird bird;
+
 };
 #endif // DAMAGOCHI_GAME_H
