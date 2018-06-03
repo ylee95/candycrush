@@ -46,7 +46,7 @@ bool Game::isGameOver() const {
 	return isDead;
 }
 
-std::string Game::to_string() {
+std::string Game::toString() {
 	std::string ret = "";
 	ret += "hunger " + std::to_string(hunger) + "\n";
 	ret += "needPoop " + std::to_string(needPoop) + "\n";
@@ -63,6 +63,6 @@ std::string Game::to_string() {
 	ret += "isDead " + str;
 }
 
-Game from_string(std::string str) {
+Game fromString(std::string str) {
 	// ?? not know what to do?
 }

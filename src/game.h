@@ -26,8 +26,8 @@ public:
 	// Potty Training
 	void pottyTrain();
 	// String methods
-	std::string to_string();
-	Game from_string(std::string str);
+	std::string toString();
+	Game fromString(std::string str);
 
 private:
 	static const int numPoop = 10;
