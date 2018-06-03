@@ -63,6 +63,39 @@ std::string Game::toString() {
 	return ss.str();
 }
 
-void fromString(std::string str) {
-	// ?? not know what to do?
+void Game::fromString(std::string str) {
+	std::stringstream ss(str);
+	std::string line;
+	while (std::getline(ss, line)) {
+		if (line.find("hunger")!=std::string::npos) {
+			hunger = std::stoi(line.substr(7));
+		}
+		else if (line.find("needPoop") != std::string::npos) {
+			needPoop = std::stoi(line.substr(9));
+		}
+		else if (line.find("poops") != std::string::npos) {
+			int pos = 6;
+			for (bool& p : poops) {
+				if (line.substr(pos) == "true") {
+					p = true;
+					pos += 5;
+				}
+				else {
+					p = false;
+					pos += 6;
+				}
+			}
+		}
+		else if (line.find("trainNum") != std::string::npos) {
+			trainNum = std::stoi(line.substr(9));
+		}
+		else if (line.find("isTrained") != std::string::npos) {
+			// cannot do ref? &isTrained?
+			isTrained = line.substr(10) == "true" ? true : false;
+		}
+		else {
+			//isDead
+			isDead = line.substr(7) == "true" ? true : false;
+		}
+	}
 }
