@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), bird(bird) {
+Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), happy(0), bird(bird) {
 	// Initialize poops array.
 	for (bool &p : poops) {
 		p = false;
@@ -58,8 +58,8 @@ std::string Game::toString() {
 	ss << std::endl;
 	ss << "trainNum" << " " << trainNum << std::endl;
 	ss << "isTrained" << " " << isTrained << std::endl;
-	ss << "isDead" << " " << std::endl;
-
+	ss << "isDead" << " " << isDead << std::endl;
+	ss << "happy" << " " << happy << std::endl;
 	return ss.str();
 }
 
@@ -71,10 +71,25 @@ void Game::fromString(std::string str) {
 		if (keyword == "hunger") {
 			ss >> hunger;
 		}
+		else if (keyword == "needPoop") {
+			ss >> needPoop;
+		}
 		else if (keyword == "poops") {
 			for (bool &p : poops) {
 				ss >> p;
 			}
+		}
+		else if (keyword == "trainNum") {
+			ss >> trainNum;
+		}
+		else if (keyword == "isTrained") {
+			ss >> isTrained;
+		}
+		else if (keyword == "isDead") {
+			ss >> isDead;
+		}
+		else if (keyword == "happy") {
+			ss >> happy;
 		}
 		else {
 			// Bad keyword.

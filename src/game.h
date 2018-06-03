@@ -46,6 +46,8 @@ private:
 	bool isTrained;
 	// dead
 	bool isDead;
+	// Happiness
+	int happy;
 
 	//Bird
 	Bird bird;
