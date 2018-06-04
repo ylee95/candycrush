@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <chrono>
 
 Game::Game(Bird bird, std::chrono::time_point<std::chrono::system_clock> birthTime) : birthTime(birthTime), hunger(0), needPoop(0), trainNum(0), isTrained(false), isDead(false), happy(0), bird(bird) {
 	// Initialize poops array.
@@ -45,6 +46,15 @@ void Game::pottyTrain() {
 
 bool Game::isGameOver() const {
 	return isDead;
+}
+
+void Game::updateStatus() {
+	auto currentTime = std::chrono::system_clock::now();
+	std::chrono::duration<double, std::milli> passTime = currentTime - lastTime;
+	
+	
+	
+
 }
 
 std::string Game::toString() {

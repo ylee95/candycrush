@@ -28,10 +28,15 @@ public:
 	// String methods
 	std::string toString();
 	void fromString(std::string str);
+	// Update the Status every time
+	void updateStatus();
 
 private:
 	static const int numPoop = 10;
 	static const int numPottyTraining = 3;
+
+	// Last checked time
+	std::chrono::time_point<std::chrono::system_clock> lastTime;
 
 	// System time of birth
 	std::chrono::time_point<std::chrono::system_clock> birthTime;
