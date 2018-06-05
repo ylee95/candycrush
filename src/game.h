@@ -1,5 +1,5 @@
-#ifndef DAMAGOCHI_GAME_H
-#define DAMAGOCHI_GAME_H
+#ifndef TAMAGOTCHI_GAME_H
+#define TAMAGOTCHI_GAME_H
 #include <array>
 #include <chrono>
 #include <string>
@@ -58,4 +58,4 @@ private:
 	Bird bird;
 
 };
-#endif // DAMAGOCHI_GAME_H
+#endif // TAMAGOTCHI_GAME_H

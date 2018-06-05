@@ -1,5 +1,5 @@
-#ifndef CANDYCRUSH_SDLWRAPPER_H
-#define CANDCANDYCRUSH_SDLWRAPPER_H
+#ifndef TAMAGOTCHI_SDLWRAPPER_H
+#define TAMAGOTCHI_SDLWRAPPER_H
 #include <SDL2/SDL.h>
 #include <cstdint>
 #include <memory>
@@ -46,4 +46,4 @@ private:
 		std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer = std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>(nullptr, SDL_DestroyRenderer);
 	} graphics;
 };
-#endif // CANDYCRUSH_SDLWRAPPER_H
+#endif // TAMAGOTCHI_SDLWRAPPER_H
