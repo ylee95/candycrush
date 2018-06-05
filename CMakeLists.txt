@@ -9,6 +9,7 @@ set (
 )
 
 set (tamagotchi_deps_prefix "${tamagotchi_BINARY_DIR}/dep")
+set (CMAKE_INSTALL_PREFIX ${tamagotchi_deps_prefix})
 list (APPEND CMAKE_PREFIX_PATH ${tamagotchi_deps_prefix})
 
 # Install dependencies.
@@ -26,8 +27,13 @@ execute_process (
 	WORKING_DIRECTORY ${tamagotchi_deps_prefix}
 )
 
-find_package (SDL2 REQUIRED)
+# SDL
+find_package (
+	SDL2 REQUIRED CONFIG
+	HINTS ${tamagotchi_deps_prefix}
+)
 
+# tamagotchi executable
 set (
 	tamagotchi_source_files
 	src/game.cpp
@@ -35,5 +41,11 @@ set (
 	src/sdlwrapper.cpp
 )
 add_executable (tamagotchi ${tamagotchi_source_files})
-target_include_directories (tamagotchi PRIVATE src ${SDL2_INCLUDE_DIRS})
-target_link_libraries (tamagotchi ${SDL2_LIBRARIES})
+target_include_directories (tamagotchi PRIVATE src)
+target_link_libraries (tamagotchi SDL2::SDL2 SDL2::SDL2main)
+
+# Install tamagotchi.
+install (
+	TARGETS tamagotchi
+	RUNTIME DESTINATION bin
+)
