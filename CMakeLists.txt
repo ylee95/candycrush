@@ -40,6 +40,10 @@ set (
 	src/main.cpp
 	src/sdlwrapper.cpp
 )
+list (
+	APPEND tamagotchi_source_files
+	src/util/time.cpp
+)
 add_executable (tamagotchi ${tamagotchi_source_files})
 target_include_directories (tamagotchi PRIVATE src)
 target_link_libraries (tamagotchi SDL2::SDL2 SDL2::SDL2main)
