@@ -1,16 +1,23 @@
-cmake_minimum_required (VERSION 2.8)
-project (tamagotchi)
+cmake_minimum_required (VERSION 3.8)
+project (superbuild)
 
-# SDL
-add_subdirectory (SDL2-2.0.8 EXCLUDE_FROM_ALL)
-target_include_directories (SDL2 PUBLIC $<BUILD_INTERFACE:${SDL2_SOURCE_DIR}/include>)
+include (ExternalProject)
 
+# Set module path.
 set (
-	SOURCE_FILES
-	src/game.cpp
-	src/main.cpp
-	src/sdlwrapper.cpp
+	CMAKE_MODULE_PATH
+	"${CMAKE_CURRENT_SOURCE_DIR}/cmake"
+	${CMAKE_MODULE_PATH}
 )
-add_executable (tamagotchi ${SOURCE_FILES})
-target_include_directories (tamagotchi PRIVATE src)
-target_link_libraries (tamagotchi SDL2)
+
+# Set prefix for external projects.
+set (superbuild_INSTALL_PREFIX "${superbuild_BINARY_DIR}/prefix")
+set (
+	superbuild_DEFAULT_ARGS
+	"-DCMAKE_PREFIX_PATH:PATH=${superbuild_INSTALL_PREFIX};${CMAKE_PREFIX_PATH}"
+	"-DCMAKE_INSTALL_PREFIX:PATH=${superbuild_INSTALL_PREFIX}"
+)
+
+add_subdirectory (thirdparty)
+
+include (External_tamagotchi)
