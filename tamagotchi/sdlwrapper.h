@@ -1,6 +1,6 @@
 #ifndef CANDYCRUSH_SDLWRAPPER_H
 #define CANDCANDYCRUSH_SDLWRAPPER_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <cstdint>
 #include <memory>
 #include <string>
