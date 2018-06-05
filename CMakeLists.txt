@@ -27,29 +27,4 @@ execute_process (
 	WORKING_DIRECTORY ${tamagotchi_deps_prefix}
 )
 
-# SDL
-find_package (
-	SDL2 REQUIRED CONFIG
-	HINTS ${tamagotchi_deps_prefix}
-)
-
-# tamagotchi executable
-set (
-	tamagotchi_source_files
-	src/game.cpp
-	src/main.cpp
-	src/sdlwrapper.cpp
-)
-list (
-	APPEND tamagotchi_source_files
-	src/util/time.cpp
-)
-add_executable (tamagotchi ${tamagotchi_source_files})
-target_include_directories (tamagotchi PRIVATE src)
-target_link_libraries (tamagotchi SDL2::SDL2 SDL2::SDL2main)
-
-# Install tamagotchi.
-install (
-	TARGETS tamagotchi
-	RUNTIME DESTINATION bin
-)
+add_subdirectory (src)
