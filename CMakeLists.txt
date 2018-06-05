@@ -1,7 +1,5 @@
 cmake_minimum_required (VERSION 3.8)
-project (superbuild)
-
-include (ExternalProject)
+project (tamagotchi)
 
 # Set module path.
 set (
@@ -10,14 +8,32 @@ set (
 	${CMAKE_MODULE_PATH}
 )
 
-# Set prefix for external projects.
-set (superbuild_INSTALL_PREFIX "${superbuild_BINARY_DIR}/prefix")
-set (
-	superbuild_DEFAULT_ARGS
-	"-DCMAKE_PREFIX_PATH:PATH=${superbuild_INSTALL_PREFIX};${CMAKE_PREFIX_PATH}"
-	"-DCMAKE_INSTALL_PREFIX:PATH=${superbuild_INSTALL_PREFIX}"
+set (tamagotchi_deps_prefix "${tamagotchi_BINARY_DIR}/dep")
+list (APPEND CMAKE_PREFIX_PATH ${tamagotchi_deps_prefix})
+
+# Install dependencies.
+configure_file (
+	CMakeLists.txt.in
+	"${tamagotchi_deps_prefix}/CMakeLists.txt"
+	COPYONLY
+)
+execute_process (
+	COMMAND ${CMAKE_COMMAND} ${tamagotchi_deps_prefix}
+	WORKING_DIRECTORY ${tamagotchi_deps_prefix}
+)
+execute_process (
+	COMMAND ${CMAKE_COMMAND} --build ${tamagotchi_deps_prefix}
+	WORKING_DIRECTORY ${tamagotchi_deps_prefix}
 )
 
-add_subdirectory (thirdparty)
+find_package (SDL2 REQUIRED)
 
-include (External_tamagotchi)
+set (
+	tamagotchi_source_files
+	src/game.cpp
+	src/main.cpp
+	src/sdlwrapper.cpp
+)
+add_executable (tamagotchi ${tamagotchi_source_files})
+target_include_directories (tamagotchi PRIVATE src ${SDL2_INCLUDE_DIRS})
+target_link_libraries (tamagotchi ${SDL2_LIBRARIES})

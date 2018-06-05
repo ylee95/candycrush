@@ -1,3 +1,4 @@
+
 # Find the SDL2 library
 #
 # Defines:

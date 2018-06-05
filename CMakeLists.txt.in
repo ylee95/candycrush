@@ -1,0 +1,18 @@
+cmake_minimum_required (VERSION 3.8)
+project (tamagotchi_deps NONE)
+
+include (ExternalProject)
+
+# Set prefix for external projects.
+set (tamagotchi_deps_INSTALL_PREFIX "${tamagotchi_deps_BINARY_DIR}")
+set (
+    tamagotchi_deps_DEFAULT_ARGS
+    "-DCMAKE_PREFIX_PATH:PATH=${tamagotchi_deps_INSTALL_PREFIX};${CMAKE_PREFIX_PATH}"
+    "-DCMAKE_INSTALL_PREFIX:PATH=${tamagotchi_deps_INSTALL_PREFIX}"
+)
+
+ExternalProject_Add (
+    SDL2
+    URL "https://www.libsdl.org/release/SDL2-2.0.8.tar.gz"
+    CMAKE_CACHE_ARGS ${tamagotchi_deps_DEFAULT_ARGS}
+)
