@@ -1,4 +1,5 @@
 #include <util/time.h>
+#include <iostream>
 int sysclockToHourOfDay(const std::chrono::time_point<std::chrono::system_clock> &sysclockTime) {
 	std::time_t t = std::chrono::system_clock::to_time_t(sysclockTime);
 	std::tm *t_tm = std::localtime(&t);
@@ -6,9 +7,9 @@ int sysclockToHourOfDay(const std::chrono::time_point<std::chrono::system_clock>
 }
 
 std::chrono::seconds effectiveDuration(const std::chrono::time_point<std::chrono::system_clock> start, const std::chrono::time_point<std::chrono::system_clock> end, int sleepTime, int wakeTime) {
-	if (start > end) {
-		// When end time is before start time,
-		// return 0 seconds.
+	if (start > end || sleepTime < wakeTime) {
+		// Invalid parameters.
+		std::cerr << "Invalid time parameter(s)." << std::endl;
 		return std::chrono::seconds(0);
 	}
 	else {
