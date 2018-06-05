@@ -1,4 +1,5 @@
 #include <game.h>
+#include <util/time.h>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -51,6 +52,7 @@ bool Game::isGameOver() const {
 void Game::updateStatus() {
 	auto currentTime = std::chrono::system_clock::now();
 	std::chrono::duration<double, std::milli> passTime = currentTime - lastTime;
+	int hourOfDay = sysclockToHourOfDay(currentTime);
 	
 	
 	
