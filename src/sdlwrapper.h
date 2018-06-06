@@ -1,9 +1,20 @@
 #ifndef TAMAGOTCHI_SDLWRAPPER_H
 #define TAMAGOTCHI_SDLWRAPPER_H
+extern "C" {
 #include <SDL2/SDL.h>
+}
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <vector>
+
+struct KeyboardHandler {
+	virtual void handleKeyboard(const SDL_KeyboardEvent &e) = 0;
+};
+
+struct QuitHandler {
+	virtual void handleQuit(const SDL_QuitEvent &e) = 0;
+};
 
 class SdlWrapper {
 public:
@@ -31,6 +42,14 @@ public:
 	// Fill a rectangle.
 	void fillRect(int x, int y, int w, int h, uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 
+	// Add a KeyboardHandler.
+	void addKeyboardHandler(const std::weak_ptr<KeyboardHandler> &h);
+	// Add a QuitHandler.
+	void addQuitHandler(const std::weak_ptr<QuitHandler> &h);
+
+	// Poll events and pass them to appropriate handlers.
+	void pollEvent();
+
 private:
 	bool initialized;
 
@@ -45,5 +64,10 @@ private:
 		std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> window = std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)>(nullptr, SDL_DestroyWindow);
 		std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> renderer = std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)>(nullptr, SDL_DestroyRenderer);
 	} graphics;
+
+	// Vector of KeyboardHandler instances.
+	std::vector<std::weak_ptr<KeyboardHandler>> keyboardHandlers;
+	// Vector of QuitHandler instances.
+	std::vector<std::weak_ptr<QuitHandler>> quitHandlers;
 };
 #endif // TAMAGOTCHI_SDLWRAPPER_H

@@ -13,6 +13,7 @@ set (
 list (
 	APPEND tamagotchi_source_files
 	game.cpp
+	director.cpp
 	sdlwrapper.cpp
 )
 list (
@@ -21,7 +22,7 @@ list (
 )
 add_executable (tamagotchi ${tamagotchi_source_files})
 target_include_directories (tamagotchi PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries (tamagotchi SDL2::SDL2 SDL2::SDL2main)
+target_link_libraries (tamagotchi PRIVATE SDL2::SDL2 SDL2::SDL2main)
 
 # Install tamagotchi.
 install (

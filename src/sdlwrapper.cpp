@@ -62,3 +62,47 @@ void SdlWrapper::fillRect(int x, int y, int w, int h, uint8_t r, uint8_t g, uint
 	rect.h = h;
 	SDL_RenderFillRect(graphics.renderer.get(), &rect);
 }
+
+void SdlWrapper::addKeyboardHandler(const std::weak_ptr<KeyboardHandler>& h)
+{
+	keyboardHandlers.emplace_back(h);
+}
+
+void SdlWrapper::addQuitHandler(const std::weak_ptr<QuitHandler>& h)
+{
+	quitHandlers.emplace_back(h);
+}
+
+void SdlWrapper::pollEvent()
+{
+	SDL_Event e;
+	// For all handler collections, erase expired pointers and pass corresponding event to the unexpired ones.
+	while (SDL_PollEvent(&e)) {
+		switch (e.type) {
+		case SDL_KEYDOWN: case SDL_KEYUP:
+			for (auto it = keyboardHandlers.begin(); it != keyboardHandlers.end();) {
+				if (it->expired()) {
+					keyboardHandlers.erase(it);
+				}
+				else {
+					it->lock()->handleKeyboard(e.key);
+					it++;
+				}
+			}
+			break;
+		case SDL_QUIT:
+			for (auto it = quitHandlers.begin(); it != quitHandlers.end();) {
+				if (it->expired()) {
+					quitHandlers.erase(it);
+				}
+				else {
+					it->lock()->handleQuit(e.quit);
+					it++;
+				}
+			}
+			break;
+		default:
+			break;
+		}
+	}
+}
